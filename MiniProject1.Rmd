@@ -1,0 +1,38 @@
+##Talking Your Ear Off
+
+Hannah Davis and Julia Bouzaher
+
+```{r, message = FALSE}
+
+library(tidyverse)
+
+ted_data <- read.csv("~/Desktop/ted_main.csv")
+
+ted_data$lengthmin <- (ted_data$duration/60)
+
+```
+
+The popularity of online videos is commonly gauged through the number of views, and to some degree, the number of comments represents the videos’ capacity to generate discussion. We made use of a dataset from Kaggle about Ted Talks consisting of many data points representing discrete Ted Talk, described by categorical/qualitative and numerical/quantitative variables such as duration in seconds, number of views, number of comments, title of talk, speaker occupation, etc. For this project, we chose to focus primarily on quantitative variables such as number of comments, duration, and views. With our given skill set, it was more suitable to focus on the quantitative variables rather than the qualitative variables that needed much more organization. We decided to focus on mapping two quantitative variables to cartesian coordinates. There is no key for these data graphics because they are described on the x and y axes. We chose red as a color for our points in order to harken back to the main theme color of TED, with a black outline on the points to make them more visible even when made less opaque. TED talks rarely go viral, but it can be inferred from these data graphics that those that do typically fall within the 12 to 25 minute range of duration. Duration was mapped onto the x axis as the independent variable that directly affected the dependent variables, views or comments. The data points were made more transparent to see where the highest density of points existed. We decided on a cartesian plot due to the non-circular habit of the data. 
+
+
+```{r, message = FALSE}
+
+##duration vs views graphic
+
+ggplot(ted_data, aes(x = lengthmin, y = views)) +
+  geom_point(shape = 23, alpha = .1, fill = "red") 
+  
+```
+
+In this data graphic, duration is mapped against views in order to determine how the length of a TED talk is associated with its popularity. Our data is not a time series, so we considered geom_point or geom_jitter. Since the data is so concentrated and somewhat overplotted, we used geom_point instead of geom_jitter. Jitter is redundant in that our data is highly concentrated in one location on the graph. By making the point marks smaller and increasing the transparency, it is possible to see that the most densely concentrated data is around and a little below the 25 minute mark. 
+
+```{r, message = FALSE}
+
+##duration vs comments graphic
+ 
+ggplot(ted_data, aes(x = lengthmin, y = comments)) +
+  geom_point(shape = 23, alpha = .1, fill = "red") 
+```
+
+In this data graphic, duration is mapped against comments in order to determine how the length of a TED talk is associated with the amount of discussion it generates. Do longer videos necessarily merit more discussion? Similarly to above, we used geom_point instead of jitter because the data is already so densely arranged and minor randomization of the data is redundant. By making the point marks smaller and increasing the transparency, it is possible to see that the most densely concentrated data is again mostly at or below the 25 minute mark.
+
